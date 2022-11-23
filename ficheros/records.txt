@@ -1,2 +1,6 @@
 AAA:2
 BBB:0
+CCC:1
+SSS:1
+FFF:0
+DFG:1

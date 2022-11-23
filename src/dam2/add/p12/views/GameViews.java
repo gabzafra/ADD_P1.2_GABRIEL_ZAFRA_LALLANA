@@ -3,11 +3,19 @@ package dam2.add.p12.views;
 import static com.diogonunes.jcolor.Ansi.colorize;
 import static com.diogonunes.jcolor.Attribute.GREEN_TEXT;
 import static com.diogonunes.jcolor.Attribute.RED_TEXT;
+import java.util.ArrayList;
 import java.util.Scanner;
+import dam2.add.p12.models.Jugador;
 import dam2.add.p12.models.Pregunta;
 import dam2.add.p12.services.Partida;
 
 public class GameViews {
+
+  public static void printHighScores(ArrayList<Jugador> playerList) {
+    printInfo("Jugador  <.-.---.-.>  Puntos");
+    playerList
+        .forEach(player -> printInfo(player.getId() + "      <.-.---.-.>  " + player.getRecord()));
+  }
 
   public static void printQuestion(Pregunta question) {
     printInfo("¿" + question.getQuestion() + "?");

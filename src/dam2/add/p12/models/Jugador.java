@@ -2,7 +2,7 @@ package dam2.add.p12.models;
 
 public class Jugador {
   private String id;
-  private int record;
+  private Integer record;
 
   public Jugador() {
     this("", 0);
@@ -21,7 +21,7 @@ public class Jugador {
     this.id = id;
   }
 
-  public int getRecord() {
+  public Integer getRecord() {
     return record;
   }
 

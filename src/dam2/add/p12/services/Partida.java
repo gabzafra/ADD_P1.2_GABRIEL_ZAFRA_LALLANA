@@ -1,6 +1,7 @@
 package dam2.add.p12.services;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Random;
 import dam2.add.p12.models.Answer;
@@ -49,6 +50,14 @@ public class Partida {
     } else {
       return foundPlayer;
     }
+  }
+
+  public void showHighScores() {
+    ArrayList<Jugador> playersList = RECORD_DAO.getAllPlayers();
+    if (playersList.size() > 1) {
+      Collections.sort(playersList, (p1, p2) -> p2.getRecord().compareTo(p1.getRecord()));
+    }
+    GameViews.printHighScores(playersList);
   }
 
   public Jugador getPlayerData() {

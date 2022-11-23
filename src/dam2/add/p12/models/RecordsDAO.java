@@ -6,6 +6,7 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.ArrayList;
 import dam2.add.p12.views.GameViews;
 
 public class RecordsDAO {
@@ -25,6 +26,23 @@ public class RecordsDAO {
         GameViews.printError("No se ha podido crear el archivo de records.");
       }
     }
+  }
+
+  public ArrayList<Jugador> getAllPlayers() {
+    ArrayList<Jugador> playersList = new ArrayList<Jugador>();
+    try (BufferedReader output = new BufferedReader(new FileReader(recordsFile))) {
+      String cursor;
+      while ((cursor = output.readLine()) != null) {
+        String[] colsArr = cursor.split(":");
+        Jugador player = new Jugador();
+        player.setId(colsArr[0]);
+        player.setRecord(Integer.parseInt(colsArr[1]));
+        playersList.add(player);
+      }
+    } catch (Exception e) {
+      return playersList;
+    }
+    return playersList;
   }
 
   public Jugador getPlayerById(String id) {
