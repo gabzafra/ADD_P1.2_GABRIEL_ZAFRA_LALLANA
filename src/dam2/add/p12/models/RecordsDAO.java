@@ -67,12 +67,12 @@ public class RecordsDAO {
           input.write(cursor);
           input.newLine();
         }
-        recordsFile.delete();
-        tempFile.renameTo(recordsFile);
-        return getPlayerById(player.getId());
       } catch (Exception e) {
         return new Jugador();
       }
+      recordsFile.delete();
+      tempFile.renameTo(recordsFile);
+      return getPlayerById(player.getId());
     }
   }
 
