@@ -2,15 +2,19 @@ package dam2.add.p12.models;
 
 public class Pregunta {
   private int id;
-  private String theme;
   private String question;
   private String[] responseArr;
+  private int correctAnswer;
 
-  public Pregunta(int id, String theme, String question, String[] responseArr) {
+  public Pregunta() {
+    this(0, null, null, 0);
+  }
+
+  public Pregunta(int id, String question, String[] responseArr, int correctAnswer) {
     this.id = id;
-    this.theme = theme;
     this.question = question;
     this.responseArr = responseArr;
+    this.correctAnswer = correctAnswer;
   }
 
   public int getId() {
@@ -19,14 +23,6 @@ public class Pregunta {
 
   public void setId(int id) {
     this.id = id;
-  }
-
-  public String getTheme() {
-    return theme;
-  }
-
-  public void setTheme(String theme) {
-    this.theme = theme;
   }
 
   public String getQuestion() {
@@ -44,4 +40,14 @@ public class Pregunta {
   public void setResponseArr(String[] responseArr) {
     this.responseArr = responseArr;
   }
+
+  public int getCorrectAnswer() {
+    return correctAnswer;
+  }
+
+  public void setCorrectAnswer(int correctAnswer) {
+    this.correctAnswer = correctAnswer;
+  }
+
+
 }
