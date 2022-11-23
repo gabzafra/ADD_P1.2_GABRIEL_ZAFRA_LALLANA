@@ -1,13 +1,13 @@
 package dam2.add.p12.views;
 
+import static com.diogonunes.jcolor.Ansi.colorize;
+import static com.diogonunes.jcolor.Attribute.GREEN_TEXT;
+import static com.diogonunes.jcolor.Attribute.RED_TEXT;
 import java.util.Scanner;
 import dam2.add.p12.models.Pregunta;
 import dam2.add.p12.services.Partida;
 
 public class GameViews {
-  static final String ANSI_RESET = "\u001B[0m";
-  static final String ANSI_RED = "\u001B[31m";
-  static final String ANSI_GREEN = "\u001B[32m";
 
   public static void printQuestion(Pregunta question) {
     printInfo("¿" + question.getQuestion() + "?");
@@ -61,11 +61,11 @@ public class GameViews {
   }
 
   public static void printSuccess(String msj) {
-    System.out.println(ANSI_GREEN + msj + ANSI_RESET);
+    System.out.println(colorize(msj, GREEN_TEXT()));
   }
 
   public static void printError(String msj) {
-    System.out.println(ANSI_RED + msj + ANSI_RESET);
+    System.out.println(colorize(msj, RED_TEXT()));
   }
 
   public static void printInfo(String msj) {
