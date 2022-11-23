@@ -65,11 +65,7 @@ public class Partida {
   };
 
   public void reportGame() {
-    GameViews.printReport(getAnswerLog(), player.getRecord().intValue());
-  }
-
-  public ArrayList<Answer> getAnswerLog() {
-    return answerLog;
+    GameViews.printReport(answerLog, player.getRecord().intValue());
   }
 
   private HashMap<Integer, Pregunta> getRandomQuestions() {
