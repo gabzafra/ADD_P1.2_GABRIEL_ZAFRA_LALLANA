@@ -35,6 +35,10 @@ public class Partida {
     });
   }
 
+  public Jugador getPlayerData() {
+    return player;
+  }
+
   private HashMap<Integer, Pregunta> getRandomQuestions() {
     HashMap<Integer, Pregunta> respuesta = new HashMap<Integer, Pregunta>();
 

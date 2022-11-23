@@ -48,12 +48,43 @@ public class GameViews {
     System.out.println(msj);
   }
 
-  static boolean esUnEntero(String str) {
+  private static boolean esUnEntero(String str) {
     try {
       Integer.parseInt(str);
       return true;
     } catch (NumberFormatException e) {
       return false;
     }
+  }
+
+  public static String askForInnitials() {
+    printInfo("La partida ha terminado.");
+
+    String id = "";
+    printInfo("Por favor introduzca su nombre:");
+    id = id.concat(askForValidString().substring(0, 1));
+    printInfo("Por favor introduzca su primer apellido:");
+    id = id.concat(askForValidString().substring(0, 1));
+    printInfo("Por favor introduzca su segundo apellido:");
+    id = id.concat(askForValidString().substring(0, 1));
+
+    return id.toUpperCase();
+  }
+
+  private static String askForValidString() {
+    Scanner input = new Scanner(System.in);
+    String response = "";
+
+    boolean isValid = false;
+    while (!isValid) {
+      response = input.nextLine();
+      if (response.length() > 0) {
+        isValid = true;
+      } else {
+        printError("Debe escribir algo.");
+      }
+    }
+
+    return response;
   }
 }
