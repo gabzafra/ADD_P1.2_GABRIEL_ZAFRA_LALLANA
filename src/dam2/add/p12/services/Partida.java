@@ -7,10 +7,12 @@ import dam2.add.p12.models.Answer;
 import dam2.add.p12.models.Jugador;
 import dam2.add.p12.models.Pregunta;
 import dam2.add.p12.models.PreguntaDAO;
+import dam2.add.p12.models.RecordsDAO;
 import dam2.add.p12.views.GameViews;
 
 public class Partida {
   private static final PreguntaDAO QUESTION_DAO = new PreguntaDAO();
+  private static final RecordsDAO RECORD_DAO = new RecordsDAO();
   private Jugador player;
   private int numberOfQuestions;
   private ArrayList<Answer> answerLog;
@@ -36,6 +38,17 @@ public class Partida {
             "La respuesta correcta es " + question.getResponseArr()[question.getCorrectAnswer()]);
       }
     });
+  }
+
+  public Jugador saveRecord() {
+    Jugador foundPlayer = RECORD_DAO.getPlayerById(player.getId());
+    if (foundPlayer.getId().equals("")) {
+      return RECORD_DAO.createNewPlayer(player);
+    } else if (foundPlayer.getRecord() < player.getRecord()) {
+      return RECORD_DAO.updatePlayer(player);
+    } else {
+      return foundPlayer;
+    }
   }
 
   public Jugador getPlayerData() {

@@ -12,6 +12,7 @@ public class MainP12 {
     Jugador player = game.getPlayerData();
     GameViews.printReport(game);
     player.setId(GameViews.askForInnitials());
+    game.saveRecord();
     System.out.println(player.getId() + "  <.-.---.-.>  " + player.getRecord());
   }
 }
