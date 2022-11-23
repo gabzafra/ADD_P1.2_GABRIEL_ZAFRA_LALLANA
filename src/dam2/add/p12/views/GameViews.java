@@ -5,9 +5,9 @@ import static com.diogonunes.jcolor.Attribute.GREEN_TEXT;
 import static com.diogonunes.jcolor.Attribute.RED_TEXT;
 import java.util.ArrayList;
 import java.util.Scanner;
+import dam2.add.p12.models.Answer;
 import dam2.add.p12.models.Jugador;
 import dam2.add.p12.models.Pregunta;
-import dam2.add.p12.services.Partida;
 
 public class GameViews {
 
@@ -120,11 +120,11 @@ public class GameViews {
     return response;
   }
 
-  public static void printReport(Partida game) {
+  public static void printReport(ArrayList<Answer> answerList, int record) {
     printInfo("Estas son sus respuestas:");
-    game.getAnswerLog().forEach(answer -> {
+    answerList.forEach(answer -> {
       printQuestion(answer.getQuestion(), answer.getResponse());
     });
-    printInfo("Ha tenido un total de " + game.getPlayerData().getRecord() + " aciertos.");
+    printInfo("Ha tenido un total de " + record + " aciertos.");
   }
 }

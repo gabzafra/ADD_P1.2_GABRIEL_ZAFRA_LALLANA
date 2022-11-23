@@ -60,8 +60,12 @@ public class Partida {
     GameViews.printHighScores(playersList);
   }
 
-  public Jugador getPlayerData() {
-    return player;
+  public void askForPlayerInfo() {
+    player.setId(GameViews.askForInnitials());
+  };
+
+  public void reportGame() {
+    GameViews.printReport(getAnswerLog(), player.getRecord().intValue());
   }
 
   public ArrayList<Answer> getAnswerLog() {
