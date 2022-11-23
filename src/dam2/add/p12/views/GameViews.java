@@ -2,12 +2,36 @@ package dam2.add.p12.views;
 
 import java.util.Scanner;
 import dam2.add.p12.models.Pregunta;
+import dam2.add.p12.services.Partida;
 
 public class GameViews {
+  static final String ANSI_RESET = "\u001B[0m";
+  static final String ANSI_RED = "\u001B[31m";
+  static final String ANSI_GREEN = "\u001B[32m";
+
   public static void printQuestion(Pregunta question) {
-    System.out.println("¿" + question.getQuestion() + "?");
+    printInfo("¿" + question.getQuestion() + "?");
     for (int i = 0; i < question.getResponseArr().length; i++) {
-      System.out.println((i + 1) + ". " + question.getResponseArr()[i]);
+      printInfo((i + 1) + ". " + question.getResponseArr()[i]);
+    }
+  }
+
+  public static void printQuestion(Pregunta question, int answer) {
+    printInfo("¿" + question.getQuestion() + "?");
+    int correctAnswer = question.getCorrectAnswer();
+    if (correctAnswer == answer) {
+      printSuccess("ACIERTO");
+    } else {
+      printError("FALLO");
+    }
+    for (int i = 0; i < question.getResponseArr().length; i++) {
+      if (i == correctAnswer) {
+        printSuccess((i + 1) + ". " + question.getResponseArr()[i]);
+      } else if (i == answer) {
+        printError((i + 1) + ". " + question.getResponseArr()[i]);
+      } else {
+        printInfo((i + 1) + ". " + question.getResponseArr()[i]);
+      }
     }
   }
 
@@ -37,11 +61,11 @@ public class GameViews {
   }
 
   public static void printSuccess(String msj) {
-    System.out.println(msj);
+    System.out.println(ANSI_GREEN + msj + ANSI_RESET);
   }
 
   public static void printError(String msj) {
-    System.err.println(msj);
+    System.out.println(ANSI_RED + msj + ANSI_RESET);
   }
 
   public static void printInfo(String msj) {
@@ -86,5 +110,13 @@ public class GameViews {
     }
 
     return response;
+  }
+
+  public static void printReport(Partida game) {
+    printInfo("Estas son sus respuestas:");
+    game.getAnswerLog().forEach(answer -> {
+      printQuestion(answer.getQuestion(), answer.getResponse());
+    });
+    printInfo("Ha tenido un total de " + game.getPlayerData().getRecord() + " aciertos.");
   }
 }

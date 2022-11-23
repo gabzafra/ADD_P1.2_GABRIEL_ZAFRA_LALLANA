@@ -3,6 +3,7 @@ package dam2.add.p12.services;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Random;
+import dam2.add.p12.models.Answer;
 import dam2.add.p12.models.Jugador;
 import dam2.add.p12.models.Pregunta;
 import dam2.add.p12.models.PreguntaDAO;
@@ -12,10 +13,11 @@ public class Partida {
   private static final PreguntaDAO QUESTION_DAO = new PreguntaDAO();
   private Jugador player;
   private int numberOfQuestions;
-
+  private ArrayList<Answer> answerLog;
 
   public Partida(int numberOfQuestions) {
     this.numberOfQuestions = numberOfQuestions;
+    this.answerLog = new ArrayList<Answer>();
     this.player = new Jugador();
   }
 
@@ -24,6 +26,7 @@ public class Partida {
     listaPreguntas.values().stream().forEach(question -> {
       GameViews.printQuestion(question);
       int answer = GameViews.getAnswer() - 1;
+      answerLog.add(new Answer(question, answer));
       if (question.getCorrectAnswer() == answer) {
         GameViews.printSuccess("Respuesta correcta!");
         player.setRecord(player.getRecord() + 1);
@@ -37,6 +40,10 @@ public class Partida {
 
   public Jugador getPlayerData() {
     return player;
+  }
+
+  public ArrayList<Answer> getAnswerLog() {
+    return answerLog;
   }
 
   private HashMap<Integer, Pregunta> getRandomQuestions() {

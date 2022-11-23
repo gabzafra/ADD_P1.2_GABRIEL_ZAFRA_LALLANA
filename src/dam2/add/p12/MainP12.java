@@ -10,6 +10,7 @@ public class MainP12 {
     Partida game = new Partida(2);
     game.start();
     Jugador player = game.getPlayerData();
+    GameViews.printReport(game);
     player.setId(GameViews.askForInnitials());
     System.out.println(player.getId() + "  <.-.---.-.>  " + player.getRecord());
   }
