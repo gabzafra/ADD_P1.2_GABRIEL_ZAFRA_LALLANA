@@ -1,22 +1,19 @@
 package dam2.add.p12;
 
 import dam2.add.p12.models.Usuario;
+import dam2.add.p12.services.AdminController;
 import dam2.add.p12.services.LoginController;
+import dam2.add.p12.services.Partida;
 import dam2.add.p12.views.MenuViews;
 
 public class MainP12 {
+  private static final int NUM_PREGUNTAS = 5;
 
   public static void main(String[] args) {
 
-    // Partida game = new Partida(2);
-    // game.start();
-    // game.askForPlayerInfo();
-    // game.reportGame();
-    // game.saveRecord();
-    // game.showHighScores();
-    // AdminController.importQuestions();
-    // AdminController.createNewQuestion();
     LoginController logCtrl = new LoginController();
+    AdminController admCtrl = new AdminController();
+    Partida game = new Partida(NUM_PREGUNTAS);
     Usuario usuario = new Usuario();
     boolean haveEnd = false;
     int option = 1;
@@ -41,9 +38,9 @@ public class MainP12 {
         case "admin":
           option = MenuViews.showAdminMenu();
           if (option == 1) {
-            // añadir pregunta
+            admCtrl.createNewQuestion();
           } else if (option == 2) {
-            // importar xls
+            admCtrl.importQuestions();
           } else {
             currentMenu = "login";
           }
@@ -51,11 +48,19 @@ public class MainP12 {
         case "start":
           option = MenuViews.showStartMenu();
           if (option == 1) {
-            // jugar partida
+            game = new Partida(NUM_PREGUNTAS);
+            game.start();
+            game.askForPlayerInfo();
+            if (MenuViews.askYesNo("¿Desea ver el resumen de la partida?")) {
+              game.reportGame();
+            }
+            game.saveRecord();
+            game.showHighScores();
+            MenuViews.waitEnter();
           } else if (option == 2) {
-            // mostrar records
+            game.showHighScores();
           } else if (option == 3) {
-            // mostrar instrucciones
+            MenuViews.showHelp();
           } else {
             currentMenu = "login";
           }

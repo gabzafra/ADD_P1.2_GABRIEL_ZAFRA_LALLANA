@@ -4,31 +4,53 @@ import java.util.Scanner;
 
 public class MenuViews {
   public static int showLoginMenu() {
-    System.out.println("Bienvenido.");
-    System.out.println("Selecione la opción deseada");
+    System.out.println("+---------------+");
+    System.out.println("|---- LOGIN ----|");
+    System.out.println("+---------------+");
     System.out.println("1. - Entrar");
     System.out.println("0. - Terminar");
+    System.out.println("Selecione la opción deseada");
     return askForOption(2);
   }
 
   public static int showAdminMenu() {
-    System.out.println("Selecione la opción deseada");
+    System.out.println("+---------------+");
+    System.out.println("|---- ADMIN ----|");
+    System.out.println("+---------------+");
     System.out.println("1. - Añadir pregunta");
     System.out.println("2. - Importar preguntas");
     System.out.println("0. - Volver");
+    System.out.println("Selecione la opción deseada");
     return askForOption(3);
   }
 
   public static int showStartMenu() {
-    System.out.println("Selecione la opción deseada");
+    System.out.println("+---------------+");
+    System.out.println("|----- GAME ----|");
+    System.out.println("+---------------+");
     System.out.println("1. - Jugar");
     System.out.println("2. - Ver records");
     System.out.println("3. - Instrucciones");
     System.out.println("0. - Volver");
+    System.out.println("Selecione la opción deseada");
     return askForOption(4);
   }
 
-  private static boolean askYesNo(String msj) {
+  public static void showHelp() {
+    System.out.println();
+    System.out.println("Durante el juego se le platearán varias");
+    System.out.println("preguntas de cultura general.");
+    System.out.println();
+    System.out.println("Para cada una de ellas se le propondrán");
+    System.out.println("trés respuestas, de las cuales solo una");
+    System.out.println("es la correcta.");
+    System.out.println();
+    System.out.println("Por respuesta corectamente elegida se");
+    System.out.println("le anotará un punto.");
+    waitEnter();
+  }
+
+  public static boolean askYesNo(String msj) {
     boolean response = false;
 
     boolean isValid = false;
@@ -78,6 +100,12 @@ public class MenuViews {
     } catch (NumberFormatException e) {
       return false;
     }
+  }
+
+  public static void waitEnter() {
+    printInfo("Pulsa ENTER para continuar.");
+    Scanner sc = new Scanner(System.in);
+    sc.nextLine();
   }
 
   public static void printSuccess(String msj) {

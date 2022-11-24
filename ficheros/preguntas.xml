@@ -55,12 +55,30 @@
     </responses>
   </pregunta>
   <pregunta id="7">
-    <enunciado>eneuyns1</enunciado>
+    <enunciado>De donde es mejor el agua</enunciado>
+    <correct>1</correct>
+    <responses>
+      <respuesta>Malaga</respuesta>
+      <respuesta>Madrid</respuesta>
+      <respuesta>Motril</respuesta>
+    </responses>
+  </pregunta>
+  <pregunta id="8">
+    <enunciado>asdsasd</enunciado>
+    <correct>2</correct>
+    <responses>
+      <respuesta>a0</respuesta>
+      <respuesta>b1</respuesta>
+      <respuesta>c2</respuesta>
+    </responses>
+  </pregunta>
+  <pregunta id="9">
+    <enunciado>55555</enunciado>
     <correct>0</correct>
     <responses>
-      <respuesta>asdasd</respuesta>
-      <respuesta>basvs</respuesta>
-      <respuesta>cscsd</respuesta>
+      <respuesta>gg</respuesta>
+      <respuesta>444</respuesta>
+      <respuesta>sss</respuesta>
     </responses>
   </pregunta>
 </preguntas>

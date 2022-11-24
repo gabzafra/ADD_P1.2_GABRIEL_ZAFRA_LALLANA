@@ -10,7 +10,7 @@ public class AdminController {
   private static final String XLS_URL = "ficheros" + File.separator + "preguntas.xls";
   private static final PreguntaDAO DAO = new PreguntaDAO();
 
-  public static void importQuestions() {
+  public void importQuestions() {
     if (XLSImporter.importXLS(XLS_URL)) {
       GameViews.printInfo("Se han importado los datos del xls");
     } else {
@@ -18,7 +18,7 @@ public class AdminController {
     }
   }
 
-  public static void createNewQuestion() {
+  public void createNewQuestion() {
     Pregunta nuevaPregunta = GameViews.askForNewQuestion();
     nuevaPregunta = DAO.createQuestion(nuevaPregunta);
     if (nuevaPregunta.getId() == 0) {
