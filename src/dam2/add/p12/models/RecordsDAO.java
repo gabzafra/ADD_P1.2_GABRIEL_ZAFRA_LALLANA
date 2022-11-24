@@ -11,17 +11,17 @@ import dam2.add.p12.views.GameViews;
 
 public class RecordsDAO {
 
-  private static final File tempFile = new File("ficheros" + File.separator + "temp.txt");
-  private static final File recordsFile = new File("ficheros" + File.separator + "records.txt");
+  private static final File TEMP_FILE = new File("ficheros" + File.separator + "temp.txt");
+  private static final File RECORDS_FILE = new File("ficheros" + File.separator + "records.txt");
 
   public RecordsDAO() {
     initRecordsFile();
   }
 
   private void initRecordsFile() {
-    if (!recordsFile.exists()) {
+    if (!RECORDS_FILE.exists()) {
       try {
-        recordsFile.createNewFile();
+        RECORDS_FILE.createNewFile();
       } catch (IOException e) {
         GameViews.printError("No se ha podido crear el archivo de records.");
       }
@@ -30,7 +30,7 @@ public class RecordsDAO {
 
   public ArrayList<Jugador> getAllPlayers() {
     ArrayList<Jugador> playersList = new ArrayList<Jugador>();
-    try (BufferedReader output = new BufferedReader(new FileReader(recordsFile))) {
+    try (BufferedReader output = new BufferedReader(new FileReader(RECORDS_FILE))) {
       String cursor;
       while ((cursor = output.readLine()) != null) {
         String[] colsArr = cursor.split(":");
@@ -47,7 +47,7 @@ public class RecordsDAO {
 
   public Jugador getPlayerById(String id) {
     Jugador respuesta = new Jugador();
-    try (BufferedReader output = new BufferedReader(new FileReader(recordsFile))) {
+    try (BufferedReader output = new BufferedReader(new FileReader(RECORDS_FILE))) {
       String cursor;
       while ((cursor = output.readLine()) != null) {
         String[] colsArr = cursor.split(":");
@@ -70,12 +70,12 @@ public class RecordsDAO {
       return new Jugador();
     } else {
       try {
-        tempFile.createNewFile();
+        TEMP_FILE.createNewFile();
       } catch (IOException e) {
         return new Jugador();
       }
-      try (BufferedWriter input = new BufferedWriter(new FileWriter(tempFile));
-          BufferedReader output = new BufferedReader(new FileReader(recordsFile))) {
+      try (BufferedWriter input = new BufferedWriter(new FileWriter(TEMP_FILE));
+          BufferedReader output = new BufferedReader(new FileReader(RECORDS_FILE))) {
         String cursor;
         while ((cursor = output.readLine()) != null) {
           String[] colsArr = cursor.split(":");
@@ -88,8 +88,8 @@ public class RecordsDAO {
       } catch (Exception e) {
         return new Jugador();
       }
-      recordsFile.delete();
-      tempFile.renameTo(recordsFile);
+      RECORDS_FILE.delete();
+      TEMP_FILE.renameTo(RECORDS_FILE);
       return getPlayerById(player.getId());
     }
   }
@@ -98,7 +98,7 @@ public class RecordsDAO {
     Jugador foundPlayer = getPlayerById(player.getId());
 
     if (foundPlayer.getId().equals("")) {
-      try (BufferedWriter input = new BufferedWriter(new FileWriter(recordsFile, true))) {
+      try (BufferedWriter input = new BufferedWriter(new FileWriter(RECORDS_FILE, true))) {
         String formatedRow = player.getId() + ":" + player.getRecord();
         input.write(formatedRow);
         input.newLine();

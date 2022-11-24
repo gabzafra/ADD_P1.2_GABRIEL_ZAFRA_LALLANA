@@ -16,7 +16,7 @@ import dam2.add.p12.views.GameViews;
 
 public class PreguntaDAO {
 
-  private static final File questionsFile = new File("ficheros" + File.separator + "preguntas.xml");
+  private static final File QUESTIONS_FILE = new File("ficheros" + File.separator + "preguntas.xml");
 
   public PreguntaDAO() {
     if (getAllQuestions().isEmpty()) {
@@ -102,7 +102,7 @@ public class PreguntaDAO {
     SAXBuilder builder = new SAXBuilder();
     Document doc;
     try {
-      doc = builder.build(questionsFile);
+      doc = builder.build(QUESTIONS_FILE);
     } catch (Exception e) {
       return new Document();
     }
@@ -114,7 +114,7 @@ public class PreguntaDAO {
     XMLOutputter xmlOut = new XMLOutputter(format);
     String nuevoDoc = xmlOut.outputString(doc);
 
-    try (PrintWriter writer = new PrintWriter(new FileWriter(questionsFile))) {
+    try (PrintWriter writer = new PrintWriter(new FileWriter(QUESTIONS_FILE))) {
       writer.println(nuevoDoc);
     } catch (Exception e) {
       return new Document();
