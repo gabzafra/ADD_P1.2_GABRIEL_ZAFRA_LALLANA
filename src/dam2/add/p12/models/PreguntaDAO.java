@@ -5,8 +5,11 @@ import java.io.FileWriter;
 import java.io.PrintWriter;
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.function.Function;
+import java.util.stream.Collectors;
 import org.jdom2.Document;
 import org.jdom2.Element;
+import org.jdom2.input.SAXBuilder;
 import org.jdom2.output.Format;
 import org.jdom2.output.XMLOutputter;
 import dam2.add.p12.views.GameViews;
@@ -67,21 +70,60 @@ public class PreguntaDAO {
       rootNode.addContent(pregunta);
     }
 
+
+
+    if (!writeXMLFile(newDoc).hasRootElement()) {
+      GameViews.printError("Error en el archivo de preguntas.");
+    } else {
+      GameViews.printSuccess("Se ha creado el archivo de preguntas.");
+    }
+  }
+
+  private Document readXMLFile() {
+    SAXBuilder builder = new SAXBuilder();
+    Document doc;
+    try {
+      doc = builder.build(questionsFile);
+    } catch (Exception e) {
+      return new Document();
+    }
+    return doc;
+  }
+
+  private static Document writeXMLFile(Document doc) {
     Format format = Format.getPrettyFormat();
     XMLOutputter xmlOut = new XMLOutputter(format);
-    String nuevoDoc = xmlOut.outputString(newDoc);
+    String nuevoDoc = xmlOut.outputString(doc);
 
     try (PrintWriter writer = new PrintWriter(new FileWriter(questionsFile))) {
       writer.println(nuevoDoc);
     } catch (Exception e) {
-      GameViews.printError("Error en el archivo de preguntas");
+      return new Document();
     }
+    return doc;
   }
 
-  // public HashMap<Integer, Pregunta> getAllQuestions() {
-  // return QUESTION_LIST;
-  // }
-  //
+  public HashMap<Integer, Pregunta> getAllQuestions() {
+    HashMap<Integer, Pregunta> response = new HashMap<Integer, Pregunta>();
+    Document doc = readXMLFile();
+    if (doc.hasRootElement()) {
+      response = (HashMap<Integer, Pregunta>) doc.getRootElement().getChildren().stream()
+          .map(PreguntaDAO::unSerialPregunta)
+          .collect(Collectors.toMap(Pregunta::getId, Function.identity()));
+    }
+    return response;
+  }
+
+  public static Pregunta unSerialPregunta(Element node) {
+    Pregunta response = new Pregunta();
+    response.setId(Integer.parseInt(node.getAttributeValue("id")));
+    response.setCorrectAnswer(Integer.parseInt(node.getChild("correct").getText()));
+    response.setQuestion(node.getChild("enunciado").getText());
+    response.setResponseArr(node.getChild("responses").getChildren().stream()
+        .map(respuesta -> respuesta.getText()).toArray(String[]::new));
+    return response;
+  }
+
   // public Pregunta getQuestionById(int id) {
   // return QUESTION_LIST.get(id);
   // }
@@ -103,6 +145,6 @@ public class PreguntaDAO {
   //
   public static void main(String[] args) {
     PreguntaDAO DAO = new PreguntaDAO();
-    DAO.initDAO();
+    DAO.getAllQuestions();
   }
 }
