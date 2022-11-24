@@ -20,10 +20,27 @@ public class GameViews {
     }
   }
 
+  public static Pregunta askForNewQuestion() {
+    Pregunta pregunta = new Pregunta();
+    pregunta.setResponseArr(new String[3]);
+    Scanner input = new Scanner(System.in);
+
+    printInfo("Introduzca el enunciado de la pregunta");
+    pregunta.setQuestion(askForValidString());
+    printInfo("Introduzca la respuesta 1");
+    pregunta.getResponseArr()[0] = askForValidString();
+    printInfo("Introduzca la respuesta 2");
+    pregunta.getResponseArr()[1] = askForValidString();
+    printInfo("Introduzca la respuesta 3");
+    pregunta.getResponseArr()[2] = input.nextLine();
+    pregunta.setCorrectAnswer(getAnswer() - 1);
+    return pregunta;
+  };
+
   public static int getAnswer() {
     int response = -1;
 
-    printInfo("Elija el número de la respuesta correcta.");
+    printInfo("Escriba el número de la respuesta correcta.");
 
     boolean isValid = false;
     while (!isValid) {
