@@ -1,8 +1,6 @@
 package dam2.add.p12;
 
-import java.io.File;
 import dam2.add.p12.services.Partida;
-import dam2.add.p12.services.XLSImporter;
 
 public class MainP12 {
 
@@ -13,6 +11,5 @@ public class MainP12 {
     game.reportGame();
     game.saveRecord();
     game.showHighScores();
-    XLSImporter.importXLS("ficheros" + File.separator + "preguntas.xls");
   }
 }
