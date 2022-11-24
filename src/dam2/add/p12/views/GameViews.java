@@ -2,7 +2,6 @@ package dam2.add.p12.views;
 
 import java.util.ArrayList;
 import java.util.Scanner;
-import dam2.add.p12.models.Answer;
 import dam2.add.p12.models.Jugador;
 import dam2.add.p12.models.Pregunta;
 
@@ -18,25 +17,6 @@ public class GameViews {
     printInfo("¿" + question.getQuestion() + "?");
     for (int i = 0; i < question.getResponseArr().length; i++) {
       printInfo((i + 1) + ". " + question.getResponseArr()[i]);
-    }
-  }
-
-  public static void printQuestion(Pregunta question, int answer) {
-    printInfo("¿" + question.getQuestion() + "?");
-    int correctAnswer = question.getCorrectAnswer();
-    if (correctAnswer == answer) {
-      printSuccess("ACIERTO");
-    } else {
-      printError("FALLO");
-    }
-    for (int i = 0; i < question.getResponseArr().length; i++) {
-      if (i == correctAnswer) {
-        printSuccess((i + 1) + ". " + question.getResponseArr()[i]);
-      } else if (i == answer) {
-        printError((i + 1) + ". " + question.getResponseArr()[i]);
-      } else {
-        printInfo((i + 1) + ". " + question.getResponseArr()[i]);
-      }
     }
   }
 
@@ -119,11 +99,4 @@ public class GameViews {
     return response;
   }
 
-  public static void printReport(ArrayList<Answer> answerList, int record) {
-    printInfo("Estas son sus respuestas:");
-    answerList.forEach(answer -> {
-      printQuestion(answer.getQuestion(), answer.getResponse());
-    });
-    printInfo("Ha tenido un total de " + record + " aciertos.");
-  }
 }

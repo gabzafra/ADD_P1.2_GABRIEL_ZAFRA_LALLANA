@@ -10,6 +10,7 @@ import dam2.add.p12.models.Pregunta;
 import dam2.add.p12.models.PreguntaDAO;
 import dam2.add.p12.models.RecordsDAO;
 import dam2.add.p12.views.GameViews;
+import dam2.add.p12.views.PdfView;
 
 public class Partida {
   private static final PreguntaDAO QUESTION_DAO = new PreguntaDAO();
@@ -65,7 +66,7 @@ public class Partida {
   };
 
   public void reportGame() {
-    GameViews.printReport(answerLog, player.getRecord().intValue());
+    PdfView.printReport(answerLog, player.getRecord().intValue());
   }
 
   private HashMap<Integer, Pregunta> getRandomQuestions() {

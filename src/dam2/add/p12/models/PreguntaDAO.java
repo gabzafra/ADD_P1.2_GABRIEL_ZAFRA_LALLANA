@@ -23,7 +23,7 @@ public class PreguntaDAO {
         new String[] {"100", "93", "116"}, 2));
     QUESTION_LIST.put(4, new Pregunta(4,
         "Cómo se llama el filósofo español conocido por su desarrollo de la teoría del cierre categorial",
-        new String[] {"Luis Aragones", "Gustavo Bueno Martínez", "Miguel de Unamuno y Jugo"}, 1));
+        new String[] {"Luis Aragonés", "Gustavo Bueno Martínez", "Miguel de Unamuno y Jugo"}, 1));
     QUESTION_LIST.put(5, new Pregunta(5,
         "Qué filósofo de la Antigua Grecia creía que el elemento del que están compuestas todas las cosas es el agua",
         new String[] {"Tales de Mileto", "Platón", "Demócrito"}, 0));
