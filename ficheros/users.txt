@@ -1,4 +1,0 @@
-adam:aaaa
-betty:bbbb
-cecil:cccc
-admin:admin
