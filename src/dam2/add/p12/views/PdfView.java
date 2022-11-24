@@ -1,7 +1,9 @@
 package dam2.add.p12.views;
 
+import java.awt.Desktop;
 import java.io.File;
 import java.io.FileOutputStream;
+import java.io.IOException;
 import java.util.ArrayList;
 import com.itextpdf.text.BaseColor;
 import com.itextpdf.text.Chunk;
@@ -17,13 +19,13 @@ import dam2.add.p12.models.Answer;
 import dam2.add.p12.models.Pregunta;
 
 public class PdfView {
-  private static final File outFile = new File("ficheros" + File.separator + "partida.pdf");
+  private static final File OUT_FILE = new File("ficheros" + File.separator + "partida.pdf");
 
   public static void printReport(ArrayList<Answer> answerList, int record) {
     Document docu = new Document(PageSize.A4, 20, 20, 70, 50);
     PdfWriter output = null;
     try {
-      output = PdfWriter.getInstance(docu, new FileOutputStream(outFile));
+      output = PdfWriter.getInstance(docu, new FileOutputStream(OUT_FILE));
       docu.open();
 
       Paragraph title = new Paragraph("Estas son sus respuestas:",
@@ -54,6 +56,12 @@ public class PdfView {
 
       docu.close();
       output.close();
+
+      try {
+        Desktop.getDesktop().open(OUT_FILE);
+      } catch (IOException ex) {
+        GameViews.printError("Error al intentar abrir el PDF");
+      }
 
     } catch (Exception e) {
       GameViews.printError("Error al generar pdf.");

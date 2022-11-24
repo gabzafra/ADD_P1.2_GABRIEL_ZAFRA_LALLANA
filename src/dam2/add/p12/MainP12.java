@@ -51,7 +51,7 @@ public class MainP12 {
             game = new Partida(NUM_PREGUNTAS);
             game.start();
             game.askForPlayerInfo();
-            if (MenuViews.askYesNo("¿Desea ver el resumen de la partida?")) {
+            if (MenuViews.askYesNo("¿Desea ver el resumen de la partida? S/N")) {
               game.reportGame();
             }
             game.saveRecord();
